@@ -1,0 +1,28 @@
+<style>
+    #welcome{
+        position: fixed;
+        top:1%;
+        right:2%
+    }
+    #meetingHistory{
+        position: fixed;
+        left:0px;
+        right:0px;
+        bottom:0px;
+        background-color: black;
+        color:white;
+    }
+</style>
+<div class="container">
+<form action="/join-room/{{username}}" method="post">
+        <label for="roomNumber">Enter Room Number:</label>
+        <input type="text" id="roomNumber" name="roomNumber">
+        <button type="submit">Join Room</button>
+<p id="welcome">Welcome, {{username}}!!!</p>
+</div>
+<div id="meetingHistory">
+    <h2><em>Meeting History</em></h2>
+  <ul id="meeting">
+    ...Previous Meetings...
+  </ul>
+</div>
