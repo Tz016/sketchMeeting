@@ -1,0 +1,32 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "The content below is an example project proposal / requirements document. Replace the text below the lines marked \"__TODO__\" with details specific to your project. Remove the \"TODO\" lines.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mediapipe/hands": "^0.4.1675469240",
+    "@tensorflow-models/hand-pose-detection": "^2.0.1",
+    "@tensorflow-models/handpose": "^0.1.0",
+    "@tensorflow/tfjs-converter": "^4.17.0",
+    "@tensorflow/tfjs-core": "^4.17.0",
+    "express": "^4.18.3",
+    "fingerpose": "^0.1.0",
+    "hbs": "^4.2.0",
+    "http": "^0.0.1-security",
+    "mongoose": "^8.2.1",
+    "p5": "^1.9.1",
+    "path": "^0.12.7",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4",
+    "url": "^0.11.3"
+  },
+  "devDependencies": {
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
