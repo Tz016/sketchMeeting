@@ -6,10 +6,13 @@
     }
     #meetingHistory{
         position: fixed;
+        display: block;
         left:0px;
         right:0px;
         bottom:0px;
+        top:80%;
         background-color: black;
+        overflow-y: scroll;
         color:white;
     }
 </style>
@@ -18,11 +21,62 @@
         <label for="roomNumber">Enter Room Number:</label>
         <input type="text" id="roomNumber" name="roomNumber">
         <button type="submit">Join Room</button>
+  </form>
+<p></p>
+<form action="/create-room/{{username}}" method="post">
+        <label for="roomNumber">Enter Room Number:</label>
+        <input type="text" id="roomNumber" name="roomNumber">
+        <label for="roomName">Enter Room Name:</label>
+        <input type="text" id="roomName" name="roomName">
+        <button type="submit">Create Room</button>
+ </form>
 <p id="welcome">Welcome, {{username}}!!!</p>
 </div>
 <div id="meetingHistory">
     <h2><em>Meeting History</em></h2>
-  <ul id="meeting">
-    ...Previous Meetings...
+   <ul id="meeting">
+    {{#each meetings}}
+    <li>
+      <strong>Meeting ID:</strong> {{this.meetingID}}<br>
+      <strong>Meeting Name:</strong> {{this.meetingName}}<br>
+      <strong>Start Time:</strong> {{this.startAt}}<br>
+      <strong>End Time:</strong> {{this.endAt}}<br>
+      {{!-- <form action="/delete/{{this.meetingID}}" method="post"> --}}
+      <button class="delete-btn" data-meeting-id="{{this._id}}">Delete</button>
+    </li>
+    {{/each}}
   </ul>
 </div>
+<script>document.addEventListener('DOMContentLoaded', function() {
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  const meetingID=this._id;
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      const xhr = new XMLHttpRequest();
+      const meetingID = button.getAttribute('data-meeting-id');
+      xhr.open('POST', `/delete/{{username}}/${meetingID}`);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            const listItem = button.closest('li');
+            listItem.remove();
+          } else {
+            console.error('删除会议时发生错误');
+          }
+        } else {
+          console.error('删除会议时发生错误');
+        }
+      };
+      
+      xhr.onerror = function() {
+        console.error('删除会议时发生错误');
+      };
+      
+      xhr.send();
+    });
+  });
+});</script>
